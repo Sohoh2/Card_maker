@@ -1,14 +1,30 @@
 import React from 'react';
-import './app.css';
+import styles from './app.module.css';
+import Login from './components/login/login'
+import Maker from './components/maker/maker'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
-function App() {
-  const name = 'ellie';
+
+function App({authService}) {
   return (
-    <>
-    <h1>Hello {name} :)</h1>
-    <h1>Hello</h1>
-    </>
+    <div className={styles.app}>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Login authService={authService} />
+          </Route>
+          <Route path="/maker">
+            <Maker authService={authService}/>
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
