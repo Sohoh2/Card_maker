@@ -3,7 +3,10 @@ import styles from './card_add_form.module.css';
 import Button from '../button/button';
 import ImageFileInput from '../image_file_input/image_file_input';
 
+
+
 const CardAddForm = ({ onAdd }) => {
+    //각 value를 ref로 연결
     const formRef = useRef();
     const nameRef = useRef();
     const companyRef = useRef();
@@ -15,8 +18,9 @@ const CardAddForm = ({ onAdd }) => {
 
 const onSubmit = event => {
     event.preventDefault();
-    const card = {
+    const cardContent = {
         id: Date.now(), //uuid
+        // 각 항목의 value가 있다면 사용 없으면 빈문자열 
         name: nameRef.current.value || '',
         company: companyRef.current.value || '',
         theme: themeRef.current.value,
@@ -28,7 +32,9 @@ const onSubmit = event => {
     };
 
     formRef.current.reset();
-    onAdd(card);
+    // 새로 만들어진 card를 prop으로 전달받은 onAdd에 전달
+    onAdd(cardContent);
+    console.log(cardContent)
     };
 
     return (
